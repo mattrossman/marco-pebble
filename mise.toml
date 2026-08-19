@@ -1,0 +1,33 @@
+[settings]
+experimental = true
+lockfile = true
+
+[tools]
+# Pebble CLI; keep this pinned and resolved through mise.
+"pipx:pebble-tool" = "5.0.39"
+
+# Alloy invokes the TypeScript compiler for .ts files in embeddedjs.
+"npm:typescript" = "6.0.3"
+
+[tasks.ensure-sdk]
+description = "Install and activate the Pebble SDK pinned in pebble-sdk-version"
+run = "scripts/ensure-pebble-sdk.sh"
+
+[tasks.clean]
+description = "Clean Pebble build artifacts"
+run = "pebble clean"
+
+[tasks.build]
+description = "Build the Marco Pebble app"
+depends = ["ensure-sdk"]
+run = "pebble build"
+
+[tasks.rebuild]
+description = "Clean and rebuild the Marco Pebble app"
+depends = ["clean", "ensure-sdk"]
+run = "pebble build"
+
+[tasks.install-emulator]
+description = "Build and install Marco Pebble in the Emery emulator"
+depends = ["build"]
+run = "pebble install --emulator emery"

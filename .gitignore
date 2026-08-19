@@ -1,0 +1,19 @@
+# Pebble/Waf build output and generated state
+build/
+.lock-waf_*
+.wafpickle-*
+
+# JavaScript dependencies
+node_modules/
+
+# Local environment and generated development configuration
+.env
+.env.*
+!.env.example
+src/pkjs/dev-config.js
+
+# Generated fixtures/configuration
+src/pkjs/active-fixture.generated.js
+
+# macOS metadata
+.DS_Store

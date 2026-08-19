@@ -1,7 +1,8 @@
 # Marco Pebble
 
-A Pebble Alloy project for finding your Pebble and phone. Watch code is written
-in TypeScript and compiled to embedded JavaScript by the Alloy build.
+A Pebble Alloy project for finding your Pebble and phone. The current MVP is a
+Time 2 speaker test: press SELECT to toggle a repeating procedural chirp. Watch code is
+written in TypeScript and compiled to embedded JavaScript by the Alloy build.
 
 ## Building & running
 
@@ -25,6 +26,7 @@ Alloy targets the modern Pebble hardware: **emery** (Pebble Time 2) and
 
 ```
 src/c/mdbl.c                   C glue around the Moddable runtime
+src/c/speaker.c                FFI bridge to the Pebble Speaker API
 src/embeddedjs/main.ts         TypeScript that runs on the watch
 src/embeddedjs/manifest.json   Moddable manifest
 src/pkjs/index.js              PebbleKit JS (phone-side) code

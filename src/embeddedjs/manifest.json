@@ -5,5 +5,20 @@
 	],
 	"modules": {
 		"*": "./main"
+	},
+	"ffi": {
+		"sources": [
+			"../c/speaker.c"
+		],
+		"functions": {
+			"marco_speaker_play": {
+				"arguments": [],
+				"returns": "int32_t"
+			},
+			"marco_speaker_stop": {
+				"arguments": [],
+				"returns": "void"
+			}
+		}
 	}
 }

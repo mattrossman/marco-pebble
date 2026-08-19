@@ -1,24 +1,49 @@
-import Poco from "commodetto/Poco";
+import Button from "pebble/button";
 
-console.log("Hello, Watchface.");
+let playing = false;
+let restartTimer: any;
 
-let render = new Poco(screen);
+declare const Natives: {
+	marco_speaker_play(): number;
+	marco_speaker_stop(): void;
+};
 
-const font = new render.Font("Bitham-Black", 30);
-const black = render.makeColor(0, 0, 0);
-const white = render.makeColor(255, 255, 255);
+function startTone() {
+	if (playing)
+		return;
 
-function draw() {
-	render.begin();
-	render.fillRectangle(white, 0, 0, render.width, render.height);
-	
-	const msg = (new Date).toTimeString().slice(0, 8);
-	const width = render.getTextWidth(msg, font);
+	playing = Natives.marco_speaker_play() !== 0;
+	console.log(playing ? "Speaker tone on" : "Speaker tone failed to start");
 
-	render.drawText(msg, font, black,
-		(render.width - width) / 2, (render.height - font.height) / 2);
- 
-	render.end();
+	if (playing)
+		restartTimer = setInterval(() => Natives.marco_speaker_play(), 1500);
 }
 
-watch.addEventListener('secondchange', draw);
+function stopTone() {
+	if (!playing)
+		return;
+
+	if (restartTimer !== undefined) {
+		clearInterval(restartTimer);
+		restartTimer = undefined;
+	}
+
+	Natives.marco_speaker_stop();
+	playing = false;
+	console.log("Speaker tone off");
+}
+
+new Button({
+	types: ["select"],
+	onPush(down, type) {
+		if (!down || type !== "select")
+			return;
+
+		if (playing)
+			stopTone();
+		else
+			startTone();
+	}
+});
+
+console.log("Marco Pebble speaker test: press SELECT to toggle the tone");

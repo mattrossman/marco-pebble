@@ -2,6 +2,10 @@
 build/
 .lock-waf_*
 .wafpickle-*
+src/c/mc.ffi.c
+
+# Local project notes and design drafts
+docs/
 
 # JavaScript dependencies
 node_modules/

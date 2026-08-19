@@ -1,5 +1,6 @@
 import {} from "piu/MC";
 import Button from "pebble/button";
+import Message from "pebble/message";
 
 let playing = false;
 let restartTimer: any;
@@ -99,6 +100,16 @@ new Button({
 		if (playing)
 			stopTone();
 		else
+			startTone();
+	}
+});
+
+let incomingMessage: Message;
+incomingMessage = new Message({
+	keys: ["RING_WATCH"],
+	onReadable() {
+		const message = incomingMessage.read();
+		if (message.get("RING_WATCH") !== undefined)
 			startTone();
 	}
 });

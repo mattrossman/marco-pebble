@@ -2,15 +2,22 @@
   "name": "marco-pebble",
   "author": "Matt Rossman",
   "version": "1.0.0",
-  "keywords": ["pebble-app"],
+  "keywords": [
+    "pebble-app"
+  ],
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@rebble/clay": "^1.0.10"
+  },
   "pebble": {
     "displayName": "Marco Pebble",
     "uuid": "0a907af5-62ac-4221-9ec8-38b487c55893",
     "projectType": "moddable",
     "sdkVersion": "3",
     "enableMultiJS": true,
+    "capabilities": [
+      "configurable"
+    ],
     "targetPlatforms": [
       "emery",
       "gabbro"

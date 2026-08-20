@@ -14,6 +14,8 @@ if [[ "${MARCO_DISABLE_SPEAKER:-0}" == "1" ]]; then
   export CFLAGS
 fi
 
+node scripts/prepare-package.js "$profile"
+
 package_backup="$(mktemp "${TMPDIR:-/tmp}/marco-pebble-package.XXXXXX")"
 cp package.json "$package_backup"
 
@@ -23,7 +25,6 @@ restore_package() {
 }
 trap restore_package EXIT
 
-node scripts/prepare-package.js "$profile"
 npm install --ignore-scripts --no-audit --no-fund
 tsc -p tsconfig.pkjs.json
 pebble build "$@"

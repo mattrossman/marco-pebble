@@ -25,7 +25,7 @@ run = "pebble build"
 [tasks.compile-commands]
 description = "Generate Pebble C/C++ IntelliSense commands"
 depends = ["ensure-sdk"]
-run = "pebble compile-commands --platform emery"
+run = "pebble compile-commands"
 
 [tasks.rebuild]
 description = "Clean and rebuild the Marco Pebble app"

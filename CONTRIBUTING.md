@@ -111,7 +111,7 @@ src/c/mdbl.c                   C glue around the Moddable runtime
 src/c/speaker.c                FFI bridge to the Pebble Speaker API
 src/embeddedjs/main.ts         TypeScript that runs on the watch
 src/embeddedjs/manifest.json   Moddable manifest
-src/pkjs/index.js              PebbleKit JS (phone-side) code
+src/pkjs/index.ts              PebbleKit JS (phone-side) entry point
 package.json                   Project metadata
 wscript                        Build rules
 ```

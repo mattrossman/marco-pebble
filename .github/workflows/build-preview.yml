@@ -41,6 +41,9 @@ jobs:
       - name: Install Pebble SDK
         run: scripts/ensure-pebble-sdk.sh
 
+      - name: Typecheck TypeScript
+        run: mise typecheck
+
       - name: Build dev .pbw
         shell: bash
         run: |

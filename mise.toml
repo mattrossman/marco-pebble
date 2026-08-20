@@ -28,6 +28,10 @@ description = "Build the Marco Pebble app"
 depends = ["ensure-sdk"]
 run = "scripts/build.sh"
 
+[tasks.typecheck]
+description = "Typecheck watch and phone TypeScript"
+run = "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.pkjs.json"
+
 [tasks.typescript-config]
 description = "Generate VS Code TypeScript IntelliSense configuration"
 run = "node scripts/generate-typescript-config.js"

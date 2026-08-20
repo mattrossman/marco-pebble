@@ -28,6 +28,10 @@ description = "Build the Marco Pebble app"
 depends = ["ensure-sdk"]
 run = "scripts/build.sh"
 
+[tasks.typescript-config]
+description = "Generate VS Code TypeScript IntelliSense configuration"
+run = "node scripts/generate-typescript-config.js"
+
 [tasks.compile-commands]
 description = "Generate Pebble C/C++ IntelliSense commands"
 depends = ["ensure-sdk"]

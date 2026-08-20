@@ -15,7 +15,7 @@ const backlightColors = [
 	0x00ff00aa,
 	0x00aa00ff,
 	0x00ffffff
-];
+] as const;
 
 const backgroundSkin = new Skin({ fill: "black" });
 const titleStyle = new Style({
@@ -156,8 +156,7 @@ new Button({
 	}
 });
 
-let incomingMessage: Message;
-incomingMessage = new Message({
+const incomingMessage = new Message({
 	keys: ["RING_WATCH"],
 	onReadable() {
 		const message = incomingMessage.read();

@@ -25,6 +25,7 @@ trap restore_package EXIT
 
 node scripts/prepare-package.js "$profile"
 pebble build "$@"
+node scripts/generate-typescript-config.js
 
 if [[ "$profile" == "dev" ]]; then
   cp build/marco-pebble.pbw build/marco-pebble-dev.pbw

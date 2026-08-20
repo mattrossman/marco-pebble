@@ -1,5 +1,7 @@
 # Pebble/Waf build output and generated state
 build/
+.pebble/
+/tsconfig.json
 .lock-waf_*
 .wafpickle-*
 src/c/mc.ffi.c

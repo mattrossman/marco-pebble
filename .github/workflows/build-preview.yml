@@ -36,7 +36,7 @@ jobs:
           cache: true
 
       - name: Install build tools
-        run: mise install --locked pipx:pebble-tool npm:typescript
+        run: mise install --locked node pipx:pebble-tool npm:typescript
 
       - name: Install JavaScript dependencies
         run: npm ci

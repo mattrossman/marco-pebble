@@ -6,6 +6,9 @@ lockfile = true
 _.file = ".env"
 
 [tools]
+# Pebble CLI invokes npm directly; pin Node to pin the bundled npm version.
+node = "24.5.0"
+
 # Pebble CLI; keep this pinned and resolved through mise.
 "pipx:pebble-tool" = "5.0.39"
 

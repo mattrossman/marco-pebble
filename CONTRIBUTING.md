@@ -1,7 +1,7 @@
 # Contributing
 
 This project uses [mise](https://mise.jdx.dev/) to manage its pinned Pebble
-CLI, TypeScript, and icon-rendering dependencies. Install mise first by
+CLI, Node/npm, TypeScript, and icon-rendering dependencies. Install mise first by
 following its [getting started guide](https://mise.jdx.dev/getting-started.html).
 
 ## Setup
@@ -30,7 +30,8 @@ compilation and VS Code diagnostics, so the editor and compiler use the same
 module settings.
 
 This activates the SDK version in `pebble-sdk-version`, and the Pebble CLI
-installs the project’s npm dependencies as needed.
+installs the project’s npm dependencies as needed. Node and its bundled npm
+are pinned in `mise.toml` because Pebble CLI invokes npm directly.
 
 Build profiles keep development and release installs separate:
 

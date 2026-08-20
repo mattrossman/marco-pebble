@@ -48,5 +48,6 @@ Useful references:
 ## Code conventions
 
 - Prefer explicit boolean conversions over clever coercion.
+- Follow the repository Biome style, including semicolon-free PKJS TypeScript.
 - Keep FFI wrappers narrow and document any platform-specific behavior.
 - Keep generated files such as `build/` and `src/c/mc.ffi.c` untracked.

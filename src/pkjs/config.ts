@@ -37,4 +37,4 @@ const clayConfig: MarcoClayConfigItem[] = [
   },
 ];
 
-export = clayConfig;
+export default clayConfig;

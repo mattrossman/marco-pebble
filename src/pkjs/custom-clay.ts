@@ -24,4 +24,4 @@ const customClay = function (this: ClayConfig): void {
   });
 };
 
-export = customClay;
+export default customClay;

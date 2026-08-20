@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "lib": ["ES5", "DOM"],
+    "strict": true,
+    "noEmitOnError": true,
+    "ignoreDeprecations": "6.0",
+    "rootDir": "src/pkjs",
+    "outDir": "build/pkjs",
+    "sourceMap": false
+  },
+  "include": ["src/pkjs/**/*.ts"]
+}

@@ -13,7 +13,8 @@ const backlightColors = [
 	0x00ff00ff,
 	0x00ff5500,
 	0x00ff00aa,
-	0x00aa00ff
+	0x00aa00ff,
+	0x00ffffff
 ];
 
 const backgroundSkin = new Skin({ fill: "black" });

@@ -24,3 +24,7 @@ int32_t marco_speaker_play(void) {
 void marco_speaker_stop(void) {
   speaker_stop();
 }
+
+int32_t marco_launched_from_phone(void) {
+  return launch_reason() == APP_LAUNCH_PHONE ? 1 : 0;
+}

@@ -39,3 +39,5 @@ wscript                        Build rules — usually no need to edit
 Full SDK docs and tutorials: <https://developer.repebble.com>
 
 TypeScript example: <https://github.com/Moddable-OpenSource/pebble-examples/tree/main/hellotypescript>
+
+PebbleKit JS source: https://github.com/coredevices/mobileapp

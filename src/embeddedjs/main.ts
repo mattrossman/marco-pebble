@@ -60,6 +60,7 @@ application.add(hint);
 declare const Natives: {
 	marco_speaker_play(): number;
 	marco_speaker_stop(): void;
+	marco_launched_from_phone(): number;
 };
 
 function startTone() {
@@ -109,9 +110,15 @@ incomingMessage = new Message({
 	keys: ["RING_WATCH"],
 	onReadable() {
 		const message = incomingMessage.read();
-		if (message.get("RING_WATCH") !== undefined)
+		const action = message.get("RING_WATCH");
+		if (action === "START")
 			startTone();
+		else if (action === "STOP")
+			stopTone();
 	}
 });
+
+if (Natives.marco_launched_from_phone() !== 0)
+	startTone();
 
 console.log("Marco Pebble speaker test: press SELECT to toggle the tone");

@@ -7,6 +7,7 @@ After changing code, run at least `mise build`.
 
 ## Alloy and TypeScript
 
+- Prefer `const` and use `let` only when the binding itself must be reassigned
 - Prefer Alloy watch code in `src/embeddedjs/*.ts` for new features.
 - Alloy compiles TypeScript to embedded JavaScript during `pebble build`; do
   not rename generated files or add a separate watch-side JavaScript build.

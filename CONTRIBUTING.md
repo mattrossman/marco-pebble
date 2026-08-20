@@ -62,6 +62,18 @@ If `compile_commands.json` is missing or the SDK changes, regenerate it with:
 mise compile-commands
 ```
 
+`mise build` also generates the local TypeScript project configuration from
+the active Pebble SDK. If the generated config is missing after a build, run:
+
+```sh
+mise typescript-config
+```
+
+Open `src/embeddedjs/main.ts` in VS Code first, then run `TypeScript: Restart TS
+Server` from the Command Palette. The command is only available while a
+TypeScript file is active. The generated `tsconfig.json` and `.pebble/` SDK
+typings cache are local files and should not be committed.
+
 ## Development workflow
 
 Build all target platforms with:

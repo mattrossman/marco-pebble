@@ -23,29 +23,10 @@ restore_package() {
 }
 trap restore_package EXIT
 
-run_pebble_build() {
-  local build_log
-  build_log="$(mktemp "${TMPDIR:-/tmp}/marco-pebble-build.XXXXXX")"
-
-  if pebble build "$@" 2>&1 | tee "$build_log"; then
-    rm -f "$build_log"
-    return 0
-  fi
-
-  if ! grep -q "resource_ids.auto.h" "$build_log"; then
-    rm -f "$build_log"
-    return 1
-  fi
-
-  rm -f "$build_log"
-  echo "Retrying Pebble build after SDK resource header bootstrap."
-  pebble build "$@"
-}
-
 node scripts/prepare-package.js "$profile"
 npm install --ignore-scripts --no-audit --no-fund
 tsc -p tsconfig.pkjs.json
-run_pebble_build "$@"
+pebble build "$@"
 node scripts/generate-typescript-config.js
 
 if [[ "$profile" == "dev" ]]; then

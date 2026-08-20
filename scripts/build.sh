@@ -2,10 +2,30 @@
 
 set -euo pipefail
 
+profile="release"
+if [[ "${1:-}" == "dev" || "${1:-}" == "release" ]]; then
+  profile="$1"
+  shift
+fi
+
 # Keep the speaker switch in the compiler configuration for local development.
 if [[ "${MARCO_DISABLE_SPEAKER:-0}" == "1" ]]; then
   CFLAGS="${CFLAGS:-} -DMARCO_DISABLE_SPEAKER"
   export CFLAGS
 fi
 
-exec pebble build "$@"
+package_backup="$(mktemp "${TMPDIR:-/tmp}/marco-pebble-package.XXXXXX")"
+cp package.json "$package_backup"
+
+restore_package() {
+  cp "$package_backup" package.json
+  rm -f "$package_backup"
+}
+trap restore_package EXIT
+
+node scripts/prepare-package.js "$profile"
+pebble build "$@"
+
+if [[ "$profile" == "dev" ]]; then
+  cp build/marco-pebble.pbw build/marco-pebble-dev.pbw
+fi

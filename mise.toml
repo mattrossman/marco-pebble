@@ -2,9 +2,15 @@
 experimental = true
 lockfile = true
 
+[env]
+_.file = ".env"
+
 [tools]
 # Pebble CLI; keep this pinned and resolved through mise.
 "pipx:pebble-tool" = "5.0.39"
+
+# Pixel-perfect SVG/PDC renderer for Pebble icon development.
+"github:HBehrens/pdc_tool" = "0.3.4"
 
 # Alloy invokes the TypeScript compiler for .ts files in embeddedjs.
 "npm:typescript" = "6.0.3"
@@ -20,7 +26,7 @@ run = "pebble clean"
 [tasks.build]
 description = "Build the Marco Pebble app"
 depends = ["ensure-sdk"]
-run = "pebble build"
+run = "scripts/build.sh"
 
 [tasks.compile-commands]
 description = "Generate Pebble C/C++ IntelliSense commands"
@@ -30,7 +36,7 @@ run = "pebble compile-commands"
 [tasks.rebuild]
 description = "Clean and rebuild the Marco Pebble app"
 depends = ["clean", "ensure-sdk"]
-run = "pebble build"
+run = "scripts/build.sh"
 
 [tasks.install-emulator]
 description = "Build and install Marco Pebble in the Emery emulator"

@@ -1,8 +1,8 @@
 # Contributing
 
 This project uses [mise](https://mise.jdx.dev/) to manage its pinned Pebble
-CLI and TypeScript dependencies. Install mise first by following its
-[getting started guide](https://mise.jdx.dev/getting-started.html).
+CLI, TypeScript, and icon-rendering dependencies. Install mise first by
+following its [getting started guide](https://mise.jdx.dev/getting-started.html).
 
 ## Setup
 
@@ -20,6 +20,15 @@ mise build
 
 This activates the SDK version in `pebble-sdk-version`, and the Pebble CLI
 installs the project’s npm dependencies as needed.
+
+To disable the speaker during local development, copy `.env.example` to `.env`
+and leave `MARCO_DISABLE_SPEAKER=1` enabled.
+
+You can also disable the speaker for one build with:
+
+```sh
+MARCO_DISABLE_SPEAKER=1 mise build
+```
 
 Generate the C/C++ IntelliSense database with:
 

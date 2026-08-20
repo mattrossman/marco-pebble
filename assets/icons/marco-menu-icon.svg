@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+  <!-- White focal area behind a point surrounded by two signal rings. -->
+  <circle cx="12" cy="12" r="5" fill="#fff"/>
+
+  <!-- Marco locator: a point surrounded by two expanding signal rings. -->
+  <g fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Inner circular ring -->
+    <polyline points="9,8 7,9 6,11 6,14 7,16 9,17"/>
+    <polyline points="16,8 18,9 19,11 19,14 18,16 16,17"/>
+
+    <!-- Outer circular ring -->
+    <polyline points="5,4 2,5 1,8 1,17 2,20 5,21"/>
+    <polyline points="20,4 23,5 24,8 24,17 23,20 20,21"/>
+  </g>
+
+  <!-- Circular locator point centered on the middle raster pixel. -->
+  <circle cx="12" cy="12" r="2" fill="#000"/>
+</svg>

@@ -1,6 +1,9 @@
 #include <pebble.h>
 
 int32_t marco_speaker_play(void) {
+#ifdef MARCO_DISABLE_SPEAKER
+  return 1;
+#else
   static const SpeakerNote ping[] = {
     { 72, SpeakerWaveformSine, 30,  40, 0 },
     { 76, SpeakerWaveformSine, 30,  55, 0 },
@@ -19,6 +22,7 @@ int32_t marco_speaker_play(void) {
   };
 
   return speaker_play_notes(ping, sizeof(ping) / sizeof(ping[0]), 75) ? 1 : 0;
+#endif
 }
 
 void marco_speaker_stop(void) {

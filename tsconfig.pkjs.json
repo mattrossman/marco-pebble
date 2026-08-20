@@ -5,6 +5,7 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "types": ["pebblekitjs"],
     "lib": ["ES5", "DOM"],
     "strict": true,
     "noEmitOnError": true,

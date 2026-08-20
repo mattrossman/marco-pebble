@@ -38,5 +38,8 @@
         }
       ]
     }
+  },
+  "devDependencies": {
+    "@types/pebblekitjs": "^4.0.33"
   }
 }

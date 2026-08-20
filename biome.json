@@ -3,10 +3,6 @@
 	"files": {
 		"includes": ["src/pkjs/**/*.ts"]
 	},
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "tab"
-	},
 	"linter": {
 		"enabled": true,
 		"rules": {

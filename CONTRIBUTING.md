@@ -24,10 +24,10 @@ Run the same checks used by the pull request workflow with:
 mise check
 ```
 
-This runs TypeScript in the watch build, phone build, and VS Code editor
-projects, plus the pinned Biome linter. The committed
-`tsconfig.pkjs.editor.json` mirrors the ECMAScript-module context VS Code uses
-for `src/pkjs/`, so editor-only module diagnostics fail in CI too.
+This runs TypeScript in the watch and phone projects, plus the pinned Biome
+linter. `tsconfig.pkjs.json` is the single source of truth for both PKJS
+compilation and VS Code diagnostics, so the editor and compiler use the same
+module settings.
 
 This activates the SDK version in `pebble-sdk-version`, and the Pebble CLI
 installs the project’s npm dependencies as needed.

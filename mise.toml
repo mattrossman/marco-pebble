@@ -31,7 +31,7 @@ run = "scripts/build.sh"
 [tasks.typecheck]
 description = "Typecheck watch and phone TypeScript"
 depends = ["ensure-sdk"]
-run = "node scripts/generate-typescript-config.js && tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.pkjs.json && tsc --noEmit -p tsconfig.pkjs.editor.json"
+run = "node scripts/generate-typescript-config.js && tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.pkjs.json"
 
 [tasks.lint]
 description = "Lint phone-side TypeScript with Biome"

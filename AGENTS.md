@@ -4,12 +4,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for repository setup and the mise task
 workflow.
 
 After changing code, run at least `mise build`.
+Before handoff, run `mise check` as well. It uses the repository-pinned
+Node/npm and Biome versions and validates the same PKJS TypeScript project
+used by VS Code and the build.
 
 ## Alloy and TypeScript
 
 - Prefer `const` and use `let` only when the binding itself must be reassigned
 - Prefer Alloy watch code in `src/embeddedjs/*.ts` for new features.
-- Alloy compiles TypeScript to embedded JavaScript during `pebble build`; do
+- Alloy compiles TypeScript to embedded JavaScript during `pebble build`. Do
   not rename generated files or add a separate watch-side JavaScript build.
 - Keep phone-side PebbleKit JS in `src/pkjs/` unless a task specifically
   requires a different runtime.
@@ -35,7 +38,7 @@ Useful references:
 
 - Confirm platform availability before using a hardware API. This project
   currently targets Emery (Pebble Time 2), whose speaker powers the locator.
-- Keep watch-side allocations and UI objects small; Pebble hardware has tight
+- Keep watch-side allocations and UI objects small. Pebble hardware has tight
   memory limits.
 - Do not assume the emulator reproduces physical sensors, haptics, audio, or
   radio behavior.

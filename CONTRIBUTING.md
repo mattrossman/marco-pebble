@@ -1,7 +1,7 @@
 # Contributing
 
 This project uses [mise](https://mise.jdx.dev/) to manage its pinned Pebble
-CLI, TypeScript, and icon-rendering dependencies. Install mise first by
+CLI, Node/npm, TypeScript, and icon-rendering dependencies. Install mise first by
 following its [getting started guide](https://mise.jdx.dev/getting-started.html).
 
 ## Setup
@@ -18,8 +18,20 @@ Build the project with:
 mise build
 ```
 
+Run the same checks used by the pull request workflow with:
+
+```sh
+mise check
+```
+
+This runs TypeScript in the watch and phone projects, plus the pinned Biome
+linter. `tsconfig.pkjs.json` is the single source of truth for both PKJS
+compilation and VS Code diagnostics, so the editor and compiler use the same
+module settings.
+
 This activates the SDK version in `pebble-sdk-version`, and the Pebble CLI
-installs the project’s npm dependencies as needed.
+installs the project’s npm dependencies as needed. Node and its bundled npm
+are pinned in `mise.toml` because Pebble CLI invokes npm directly.
 
 Build profiles keep development and release installs separate:
 
@@ -69,6 +81,9 @@ the active Pebble SDK. If the generated config is missing after a build, run:
 mise typescript-config
 ```
 
+`mise typecheck` can bootstrap that generated configuration from the active SDK
+before a build, which keeps a fresh checkout and VS Code on the same typings.
+
 Open `src/embeddedjs/main.ts` in VS Code first, then run `TypeScript: Restart TS
 Server` from the Command Palette. The command is only available while a
 TypeScript file is active. The generated `tsconfig.json` and `.pebble/` SDK
@@ -111,7 +126,7 @@ src/c/mdbl.c                   C glue around the Moddable runtime
 src/c/speaker.c                FFI bridge to the Pebble Speaker API
 src/embeddedjs/main.ts         TypeScript that runs on the watch
 src/embeddedjs/manifest.json   Moddable manifest
-src/pkjs/index.js              PebbleKit JS (phone-side) code
+src/pkjs/index.ts              PebbleKit JS (phone-side) entry point
 package.json                   Project metadata
 wscript                        Build rules
 ```

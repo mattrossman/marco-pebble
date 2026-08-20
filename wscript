@@ -23,6 +23,15 @@ def configure(ctx):
     ctx.load('pebble_sdk')
 
 
+def ensure_resource_id_header(ctx):
+    build_root = ctx.path.get_bld().abspath()
+    resource_header = os.path.join(build_root, ctx.env.BUILD_DIR, 'src', 'resource_ids.auto.h')
+    os.makedirs(os.path.dirname(resource_header), exist_ok=True)
+    if not os.path.exists(resource_header):
+        with open(resource_header, 'w') as header:
+            header.write('#pragma once\n')
+
+
 def build(ctx):
     ctx.load('pebble_sdk')
 
@@ -35,6 +44,7 @@ def build(ctx):
         ctx.set_group(ctx.env.PLATFORM_NAME)
         app_elf = '{}/pebble-app.elf'.format(ctx.env.BUILD_DIR)
         ctx.pbl_build(source=ctx.path.ant_glob('src/c/**/*.c'), target=app_elf, bin_type='app')
+        ensure_resource_id_header(ctx)
 
         if build_worker:
             worker_elf = '{}/pebble-worker.elf'.format(ctx.env.BUILD_DIR)
@@ -48,7 +58,7 @@ def build(ctx):
 
     ctx.set_group('bundle')
     ctx.pbl_bundle(binaries=binaries,
-                   js=ctx.path.ant_glob(['src/pkjs/**/*.js',
+                   js=ctx.path.ant_glob(['build/pkjs/**/*.js',
                                          'src/pkjs/**/*.json',
                                          'src/common/**/*.js']),
-                   js_entry_file='src/pkjs/index.js')
+                   js_entry_file='build/pkjs/index.js')

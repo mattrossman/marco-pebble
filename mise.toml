@@ -6,7 +6,10 @@ lockfile = true
 _.file = ".env"
 
 [tools]
-# Pebble CLI; keep this pinned and resolved through mise.
+# Pebble CLI invokes npm directly. Pin Node to pin the bundled npm version.
+node = "24.5.0"
+
+# Pebble CLI. Keep this pinned and resolved through mise.
 "pipx:pebble-tool" = "5.0.39"
 
 # Pixel-perfect SVG/PDC renderer for Pebble icon development.
@@ -27,6 +30,27 @@ run = "pebble clean"
 description = "Build the Marco Pebble app"
 depends = ["ensure-sdk"]
 run = "scripts/build.sh"
+
+[tasks.typecheck]
+description = "Typecheck watch and phone TypeScript"
+depends = ["ensure-sdk"]
+run = "node scripts/generate-typescript-config.js && tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.pkjs.json"
+
+[tasks.lint]
+description = "Format and lint phone-side TypeScript with Biome"
+run = '''
+if [ "${GITHUB_ACTIONS:-}" = "true" ]; then
+  reporter=github
+else
+  reporter=default
+fi
+npx --no-install biome ci --reporter="$reporter" biome.json src/pkjs
+'''
+
+[tasks.check]
+description = "Run the repository's editor and build feedback checks"
+depends = ["typecheck", "lint"]
+run = "true"
 
 [tasks.typescript-config]
 description = "Generate VS Code TypeScript IntelliSense configuration"

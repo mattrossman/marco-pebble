@@ -4,6 +4,17 @@ import Message from "pebble/message";
 
 let playing = false;
 let restartTimer: any;
+let lightTimer: any;
+let finishing = false;
+
+const backlightColors = [
+	0x00ff0055,
+	0x0000ffff,
+	0x00ff00ff,
+	0x00ff5500,
+	0x00ff00aa,
+	0x00aa00ff
+];
 
 const backgroundSkin = new Skin({ fill: "black" });
 const titleStyle = new Style({
@@ -61,25 +72,51 @@ declare const Natives: {
 	marco_speaker_play(): number;
 	marco_speaker_stop(): void;
 	marco_launched_from_phone(): number;
+	marco_light_set_color_rgb888(rgb: number): void;
 };
 
+function setBacklightColor(index: number) {
+	Natives.marco_light_set_color_rgb888(backlightColors[index % backlightColors.length]);
+	watch.light(true);
+}
+
+function startBacklight() {
+	if (lightTimer !== undefined)
+		return;
+
+	let colorIndex = 0;
+	setBacklightColor(colorIndex);
+	lightTimer = setInterval(() => {
+		colorIndex += 1;
+		setBacklightColor(colorIndex);
+	}, 1000);
+}
+
+function stopBacklight() {
+	if (lightTimer !== undefined) {
+		clearInterval(lightTimer);
+		lightTimer = undefined;
+	}
+
+	watch.light(false);
+}
+
 function startTone() {
-	if (playing)
+	if (playing || finishing)
 		return;
 
 	playing = Natives.marco_speaker_play() !== 0;
 	console.log(playing ? "Speaker tone on" : "Speaker tone failed to start");
 	status.string = playing ? "PINGING" : "READY";
-	hint.string = playing ? "SELECT: STOP SOUND" : "SELECT: START SOUND";
+	hint.string = playing ? "PRESS ANY BUTTON WHEN FOUND" : "WAITING FOR PHONE";
 
-	if (playing)
+	if (playing) {
 		restartTimer = setInterval(() => Natives.marco_speaker_play(), 1500);
+		startBacklight();
+	}
 }
 
 function stopTone() {
-	if (!playing)
-		return;
-
 	if (restartTimer !== undefined) {
 		clearInterval(restartTimer);
 		restartTimer = undefined;
@@ -87,21 +124,34 @@ function stopTone() {
 
 	Natives.marco_speaker_stop();
 	playing = false;
+	stopBacklight();
 	status.string = "READY";
-	hint.string = "SELECT: START SOUND";
+	hint.string = "WAITING FOR PHONE";
 	console.log("Speaker tone off");
 }
 
+function acknowledgeFound() {
+	if (finishing)
+		return;
+
+	finishing = true;
+	stopTone();
+	status.string = "YOU FOUND ME!";
+	hint.string = "SEE YOU SOON";
+	setBacklightColor(0);
+	setTimeout(() => {
+		stopBacklight();
+		watch.exit();
+	}, 1500);
+}
+
 new Button({
-	types: ["select"],
+	types: ["back", "up", "down", "select"],
 	onPush(down, type) {
-		if (!down || type !== "select")
+		if (!down || finishing)
 			return;
 
-		if (playing)
-			stopTone();
-		else
-			startTone();
+		acknowledgeFound();
 	}
 });
 
@@ -121,4 +171,4 @@ incomingMessage = new Message({
 if (Natives.marco_launched_from_phone() !== 0)
 	startTone();
 
-console.log("Marco Pebble speaker test: press SELECT to toggle the tone");
+console.log("Marco Pebble locator: start and stop from the phone");

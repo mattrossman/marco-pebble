@@ -28,3 +28,7 @@ void marco_speaker_stop(void) {
 int32_t marco_launched_from_phone(void) {
   return launch_reason() == APP_LAUNCH_PHONE ? 1 : 0;
 }
+
+void marco_light_set_color_rgb888(uint32_t rgb) {
+  light_set_color_rgb888(rgb);
+}

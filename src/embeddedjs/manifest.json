@@ -22,6 +22,10 @@
 			"marco_launched_from_phone": {
 				"arguments": [],
 				"returns": "int32_t"
+			},
+			"marco_light_set_color_rgb888": {
+				"arguments": ["uint32_t"],
+				"returns": "void"
 			}
 		}
 	}

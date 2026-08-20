@@ -35,7 +35,7 @@ run = "node scripts/generate-typescript-config.js && tsc --noEmit -p tsconfig.js
 
 [tasks.lint]
 description = "Lint phone-side TypeScript with Biome"
-run = "biome check src/pkjs"
+run = "npx --no-install biome check biome.json src/pkjs"
 
 [tasks.check]
 description = "Run the repository's editor and build feedback checks"

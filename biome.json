@@ -1,16 +1,16 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.9/schema.json",
-  "files": {
-    "includes": ["src/pkjs/**/*.ts"]
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "tab"
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
-  }
+	"$schema": "https://biomejs.dev/schemas/2.5.9/schema.json",
+	"files": {
+		"includes": ["src/pkjs/**/*.ts"]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended"
+		}
+	}
 }

@@ -3,6 +3,7 @@ build/
 .lock-waf_*
 .wafpickle-*
 src/c/mc.ffi.c
+compile_commands.json
 
 # Local project notes and design drafts
 docs/

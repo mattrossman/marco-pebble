@@ -1,14 +1,9 @@
 ## Dev iteration flow
 
-Use the repository's mise tasks so the Pebble CLI and SDK pins are honored:
+See [CONTRIBUTING.md](CONTRIBUTING.md) for repository setup and the mise task
+workflow.
 
-- `mise build` — build all configured target platforms.
-- `mise rebuild` — clean and rebuild from scratch.
-- `mise install-emulator` — build and install into the Emery emulator.
-- `mise clean` — remove Pebble build artifacts.
-
-After changing code, run at least `mise build`. Use a physical watch for
-hardware behavior that an emulator cannot reproduce, such as speaker output.
+After changing code, run at least `mise build`.
 
 ## Alloy and TypeScript
 

@@ -10,6 +10,7 @@
     "@rebble/clay": "^1.0.10"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.9",
     "@types/pebblekitjs": "^4.0.33"
   },
   "pebble": {

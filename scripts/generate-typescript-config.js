@@ -5,6 +5,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { execFileSync } = require("node:child_process");
 
 const repoRoot = path.resolve(__dirname, "..");
 const buildRoot = path.join(repoRoot, "build", "mods");
@@ -23,6 +24,37 @@ function findFile(root, filename) {
 			if (found) return found;
 		}
 	}
+}
+
+function collectTypingPaths(root) {
+	const paths = {};
+
+	function visit(directory) {
+		for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+			const entryPath = path.join(directory, entry.name);
+			if (entry.isDirectory()) {
+				visit(entryPath);
+				continue;
+			}
+			if (!entry.isFile() || !entry.name.endsWith(".d.ts")) continue;
+
+			const relativePath = path.relative(root, entryPath).replaceAll(path.sep, "/");
+			const moduleName = relativePath.slice(0, -5);
+			paths[moduleName] = [entryPath];
+			if (moduleName.startsWith("embedded_")) {
+				paths[`embedded:${moduleName.slice("embedded_".length)}`] = [entryPath];
+			}
+			if (moduleName.startsWith("embedded/")) {
+				paths[`embedded:${moduleName.slice("embedded/".length)}`] = [entryPath];
+			}
+			if (moduleName.endsWith("/index")) {
+				paths[moduleName.slice(0, -6)] = [entryPath];
+			}
+		}
+	}
+
+	visit(root);
+	return paths;
 }
 
 function rewriteSdkPath(value) {
@@ -56,27 +88,65 @@ function rewritePaths(paths) {
 }
 
 const generatedConfigPath = findFile(buildRoot, "tsconfig-base.json");
-if (!generatedConfigPath) {
-	console.error("Could not find the generated Moddable TypeScript configuration.");
-	console.error("Run `mise build` before generating the VS Code configuration.");
-	process.exit(1);
+let generatedConfig;
+let typingsRoot;
+
+if (generatedConfigPath) {
+	generatedConfig = JSON.parse(fs.readFileSync(generatedConfigPath, "utf8"));
+	const typingPath = Object.values(generatedConfig.compilerOptions.paths ?? {})
+		.flat()
+		.find((value) => value.includes("/typings/") || value.includes("\\typings\\"));
+
+	if (!typingPath) {
+		console.error("Could not locate the Moddable SDK typings in the generated config.");
+		process.exit(1);
+	}
+
+	const normalizedTypingPath = typingPath.replaceAll("\\", "/");
+	const typingsMarker = "/typings/";
+	typingsRoot = path.resolve(
+		normalizedTypingPath.slice(0, normalizedTypingPath.indexOf(typingsMarker) + "/typings".length),
+	);
+} else {
+	const sdkIncludePath = execFileSync(
+		"pebble",
+		["sdk", "include-path", "emery"],
+		{ encoding: "utf8" },
+	).trim();
+	const sdkRoot = path.resolve(sdkIncludePath, "../../../..");
+	const moddableRoot = path.join(sdkRoot, "toolchain", "moddable");
+	typingsRoot = path.join(moddableRoot, "typings");
+	generatedConfig = {
+		compilerOptions: {
+			forceConsistentCasingInFileNames: true,
+			module: "preserve",
+			resolveJsonModule: true,
+			paths: {
+				...collectTypingPaths(typingsRoot),
+				"embedded:io/system": [path.join(typingsRoot, "embedded_io", "system")],
+				"embedded:provider/builtin": [path.join(typingsRoot, "pebble", "device")],
+				url: [path.join(typingsRoot, "web", "url")],
+				headers: [path.join(typingsRoot, "web", "headers")],
+				webstorage: [path.join(typingsRoot, "web", "webstorage")],
+				fetch: [path.join(typingsRoot, "web", "fetch")],
+				"web/websocket": [path.join(typingsRoot, "web", "websocket")],
+			},
+			lib: ["es2025", "esnext.disposable"],
+			sourceMap: true,
+			target: "es2025",
+			types: [
+				path.join(typingsRoot, "pebble", "global"),
+				path.join(typingsRoot, "pebble", "piu"),
+				path.join(typingsRoot, "pebble", "poco"),
+				path.join(typingsRoot, "easing"),
+				path.join(typingsRoot, "piu", "MC"),
+				path.join(typingsRoot, "piu", "MC-types"),
+				path.join(moddableRoot, "xs", "includes", "xs"),
+				path.join(typingsRoot, "global"),
+			],
+		},
+	};
 }
-
-const generatedConfig = JSON.parse(fs.readFileSync(generatedConfigPath, "utf8"));
-const typingPath = Object.values(generatedConfig.compilerOptions.paths ?? {})
-	.flat()
-	.find((value) => value.includes("/typings/") || value.includes("\\typings\\"));
-
-if (!typingPath) {
-	console.error("Could not locate the Moddable SDK typings in the generated config.");
-	process.exit(1);
-}
-
-const normalizedTypingPath = typingPath.replaceAll("\\", "/");
-const typingsMarker = "/typings/";
-const typingsRoot = path.resolve(
-	normalizedTypingPath.slice(0, normalizedTypingPath.indexOf(typingsMarker) + "/typings".length),
-);
 
 fs.rmSync(localRoot, { recursive: true, force: true });
 fs.mkdirSync(localRoot, { recursive: true });

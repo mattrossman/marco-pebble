@@ -18,6 +18,17 @@ Build the project with:
 mise build
 ```
 
+Run the same checks used by the pull request workflow with:
+
+```sh
+mise check
+```
+
+This runs TypeScript in the watch build, phone build, and VS Code editor
+projects, plus the pinned Biome linter. The committed
+`tsconfig.pkjs.editor.json` mirrors the ECMAScript-module context VS Code uses
+for `src/pkjs/`, so editor-only module diagnostics fail in CI too.
+
 This activates the SDK version in `pebble-sdk-version`, and the Pebble CLI
 installs the project’s npm dependencies as needed.
 
@@ -68,6 +79,9 @@ the active Pebble SDK. If the generated config is missing after a build, run:
 ```sh
 mise typescript-config
 ```
+
+`mise typecheck` can bootstrap that generated configuration from the active SDK
+before a build, which keeps a fresh checkout and VS Code on the same typings.
 
 Open `src/embeddedjs/main.ts` in VS Code first, then run `TypeScript: Restart TS
 Server` from the Command Palette. The command is only available while a

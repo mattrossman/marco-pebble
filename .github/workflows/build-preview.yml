@@ -38,11 +38,17 @@ jobs:
       - name: Install build tools
         run: mise install --locked pipx:pebble-tool npm:typescript
 
+      - name: Install JavaScript dependencies
+        run: npm ci
+
       - name: Install Pebble SDK
         run: scripts/ensure-pebble-sdk.sh
 
       - name: Typecheck TypeScript
         run: mise typecheck
+
+      - name: Lint TypeScript
+        run: mise lint
 
       - name: Build dev .pbw
         shell: bash

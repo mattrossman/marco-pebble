@@ -20,6 +20,9 @@ jobs:
           install: true
           cache: true
 
+      - name: Prepare package metadata
+        run: node scripts/prepare-package.js release
+
       - name: Install JavaScript dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
 

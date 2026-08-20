@@ -48,6 +48,5 @@ Useful references:
 ## Code conventions
 
 - Prefer explicit boolean conversions over clever coercion.
-- In prose, avoid semicolons. Prefer short sentences or commas.
 - Keep FFI wrappers narrow and document any platform-specific behavior.
 - Keep generated files such as `build/` and `src/c/mc.ffi.c` untracked.

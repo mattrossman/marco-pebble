@@ -1,7 +1,8 @@
 const Clay = require("@rebble/clay");
 const clayConfig = require("./config");
+const customClay = require("./custom-clay");
 
-new Clay(clayConfig);
+new Clay(clayConfig, customClay);
 
 Pebble.addEventListener("ready",
     function(e) {

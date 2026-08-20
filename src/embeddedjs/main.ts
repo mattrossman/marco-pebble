@@ -58,7 +58,7 @@ const hint = new Label(null, {
 	left: 0,
 	right: 0,
 	height: 24,
-	string: "SELECT: START SOUND",
+	string: "WAITING FOR PHONE",
 	style: hintStyle
 });
 

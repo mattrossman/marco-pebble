@@ -38,7 +38,14 @@ run = "node scripts/generate-typescript-config.js && tsc --noEmit -p tsconfig.js
 
 [tasks.lint]
 description = "Format and lint phone-side TypeScript with Biome"
-run = "npx --no-install biome ci --reporter=github biome.json src/pkjs"
+run = '''
+if [ "${GITHUB_ACTIONS:-}" = "true" ]; then
+  reporter=github
+else
+  reporter=default
+fi
+npx --no-install biome ci --reporter="$reporter" biome.json src/pkjs
+'''
 
 [tasks.check]
 description = "Run the repository's editor and build feedback checks"

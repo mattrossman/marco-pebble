@@ -4,6 +4,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for repository setup and the mise task
 workflow.
 
 After changing code, run at least `mise build`.
+Before handoff, run `mise check` as well; it uses the repository-pinned
+Node/npm and Biome versions and validates the same PKJS TypeScript project
+used by VS Code and the build.
 
 ## Alloy and TypeScript
 

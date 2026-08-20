@@ -37,8 +37,8 @@ depends = ["ensure-sdk"]
 run = "node scripts/generate-typescript-config.js && tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.pkjs.json"
 
 [tasks.lint]
-description = "Lint phone-side TypeScript with Biome"
-run = "npx --no-install biome check biome.json src/pkjs"
+description = "Format and lint phone-side TypeScript with Biome"
+run = "npx --no-install biome ci --reporter=github biome.json src/pkjs"
 
 [tasks.check]
 description = "Run the repository's editor and build feedback checks"

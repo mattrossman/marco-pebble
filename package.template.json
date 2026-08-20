@@ -9,6 +9,9 @@
   "dependencies": {
     "@rebble/clay": "^1.0.10"
   },
+  "devDependencies": {
+    "@types/pebblekitjs": "^4.0.33"
+  },
   "pebble": {
     "displayName": "Marco Pebble",
     "uuid": "0a907af5-62ac-4221-9ec8-38b487c55893",

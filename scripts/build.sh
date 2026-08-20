@@ -23,8 +23,9 @@ restore_package() {
 }
 trap restore_package EXIT
 
-tsc -p tsconfig.pkjs.json
 node scripts/prepare-package.js "$profile"
+npm install --ignore-scripts --no-audit --no-fund
+tsc -p tsconfig.pkjs.json
 pebble build "$@"
 node scripts/generate-typescript-config.js
 

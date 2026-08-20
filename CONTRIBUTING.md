@@ -21,6 +21,17 @@ mise build
 This activates the SDK version in `pebble-sdk-version`, and the Pebble CLI
 installs the project’s npm dependencies as needed.
 
+Build profiles keep development and release installs separate:
+
+```sh
+mise build dev
+mise build release
+```
+
+The dev build uses a separate app UUID and appears as `Marco Pebble (Dev)`, so
+it can be installed alongside the release build. `mise build` defaults to the
+release profile.
+
 To disable the speaker during local development, copy `.env.example` to `.env`
 and leave `MARCO_DISABLE_SPEAKER=1` enabled.
 

@@ -33,7 +33,7 @@ Useful references:
 ## Pebble constraints
 
 - Confirm platform availability before using a hardware API. This project
-  currently targets Emery (Pebble Time 2) and Gabbro (Pebble Round 2).
+  currently targets Emery (Pebble Time 2), whose speaker powers the locator.
 - Keep watch-side allocations and UI objects small; Pebble hardware has tight
   memory limits.
 - Do not assume the emulator reproduces physical sensors, haptics, audio, or

@@ -19,8 +19,7 @@
       "configurable"
     ],
     "targetPlatforms": [
-      "emery",
-      "gabbro"
+      "emery"
     ],
     "watchapp": {
       "watchface": false

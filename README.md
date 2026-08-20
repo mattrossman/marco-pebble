@@ -1,17 +1,26 @@
-# Marco Pebble
+# 📡 Marco Pebble
 
-A Pebble watchapp for finding your Pebble and phone. The current MVP is a
-speaker test that plays a repeating procedural chirp.
+A locator for your Pebble Time 2.
 
-## Using the app
+## Current features
 
-Press SELECT to start or stop the sound. The phone can also tell the watch to
-start or stop the sound.
+- Start a repeating locator tone on the watch from the phone configuration.
+- Stop the tone from the phone or by pressing any watch button.
+- Show visual backlight feedback while the watch is pinging.
+- Support Pebble Time 2 (Emery), whose speaker powers the locator tone.
+
+## Planned features
+
+Marco Pebble is an early MVP. Planned improvements include:
+
+- Ringing the phone from the watch.
+- Vibration fallback for watches without a speaker.
+- Last-connected location and map presentation.
 
 ## Target platforms
 
-The app currently targets Emery (Pebble Time 2) and Gabbro (Pebble Round 2).
-Other platforms are not supported.
+The app currently targets Emery (Pebble Time 2). Other platforms are not
+supported because the locator depends on the Pebble Speaker API.
 
 ## Contributing
 

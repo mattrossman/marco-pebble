@@ -1,11 +1,11 @@
-import type Clay from "@rebble/clay"
+import type Clay from "@rebble/clay";
 
-type ClayConfigItem = Clay.ClayConfigItem
+type ClayConfigItem = Clay.ClayConfigItem;
 
 interface MarcoClayConfigItem extends Omit<ClayConfigItem, "items"> {
-	primary?: boolean
-	description?: string
-	items?: MarcoClayConfigItem[]
+	primary?: boolean;
+	description?: string;
+	items?: MarcoClayConfigItem[];
 }
 
 const clayConfig: MarcoClayConfigItem[] = [
@@ -35,6 +35,6 @@ const clayConfig: MarcoClayConfigItem[] = [
 			},
 		],
 	},
-]
+];
 
-export default clayConfig
+export default clayConfig;

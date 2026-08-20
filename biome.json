@@ -7,11 +7,6 @@
 		"enabled": true,
 		"indentStyle": "tab"
 	},
-	"javascript": {
-		"formatter": {
-			"semicolons": "asNeeded"
-		}
-	},
 	"linter": {
 		"enabled": true,
 		"rules": {

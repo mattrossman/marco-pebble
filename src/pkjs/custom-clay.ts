@@ -1,4 +1,4 @@
-import Clay from "@rebble/clay";
+import type Clay from "@rebble/clay";
 
 type ClayConfig = Clay.ClayConfig;
 

@@ -3,6 +3,8 @@
     "target": "ES5",
     "module": "CommonJS",
     "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "lib": ["ES5", "DOM"],
     "strict": true,
     "noEmitOnError": true,

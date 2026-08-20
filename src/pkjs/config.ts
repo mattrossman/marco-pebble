@@ -1,6 +1,8 @@
-import Clay = require("@rebble/clay");
+import Clay from "@rebble/clay";
 
-interface MarcoClayConfigItem extends Omit<Clay.ClayConfigItem, "items"> {
+type ClayConfigItem = Clay.ClayConfigItem;
+
+interface MarcoClayConfigItem extends Omit<ClayConfigItem, "items"> {
   primary?: boolean;
   description?: string;
   items?: MarcoClayConfigItem[];

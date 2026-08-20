@@ -1,5 +1,6 @@
 interface PebbleReadyEvent {}
 
+
 declare const Pebble: {
   addEventListener(
     event: "ready",

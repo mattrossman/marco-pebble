@@ -1,6 +1,6 @@
-import Clay = require("@rebble/clay");
-import clayConfig = require("./config");
-import customClay = require("./custom-clay");
+import Clay from "@rebble/clay";
+import clayConfig from "./config";
+import customClay from "./custom-clay";
 
 new Clay(clayConfig, customClay);
 

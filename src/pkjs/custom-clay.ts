@@ -1,6 +1,8 @@
-import Clay = require("@rebble/clay");
+import Clay from "@rebble/clay";
 
-const customClay = function (this: Clay.ClayConfig): void {
+type ClayConfig = Clay.ClayConfig;
+
+const customClay = function (this: ClayConfig): void {
   const clay = this;
 
   function sendCommand(command: "START" | "STOP"): void {

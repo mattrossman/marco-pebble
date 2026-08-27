@@ -109,6 +109,15 @@ Build and install the app in the Emery emulator with:
 mise install-emulator
 ```
 
+Build and install the development app through CloudPebble with:
+
+```sh
+mise install-cloud
+```
+
+This defaults to the `Marco Pebble (Dev)` profile. To install the release
+profile instead, use `mise install-cloud release`.
+
 Remove Pebble build artifacts with:
 
 ```sh

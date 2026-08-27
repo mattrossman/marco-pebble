@@ -8,6 +8,8 @@ Before handoff, run `mise check` as well. It uses the repository-pinned
 Node/npm and Biome versions and validates the same PKJS TypeScript project
 used by VS Code and the build.
 
+When asked to install the app to the phone or watch, use `mise install-cloud`.
+
 ## Alloy and TypeScript
 
 - Prefer `const` and use `let` only when the binding itself must be reassigned

@@ -72,6 +72,5 @@ depends = ["build"]
 run = "pebble install --emulator emery"
 
 [tasks.install-cloud]
-description = "Build and install Marco Pebble through CloudPebble"
-depends = ["build"]
-run = "pebble install --cloudpebble"
+description = "Build and install Marco Pebble (default: dev) through CloudPebble"
+run = "scripts/install-cloud.sh"

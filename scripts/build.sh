@@ -25,6 +25,9 @@ restore_package() {
 }
 trap restore_package EXIT
 
+# Moddable generates the watch bytecode as part of the Pebble build. Cleaning
+# first ensures Waf cannot reuse a resource pack from an earlier source tree.
+pebble clean
 npm install --ignore-scripts --no-audit --no-fund
 tsc -p tsconfig.pkjs.json
 pebble build "$@"

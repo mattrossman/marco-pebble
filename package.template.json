@@ -30,7 +30,8 @@
     },
     "messageKeys": [
       "RING_WATCH",
-      "RING_PHONE"
+      "RING_PHONE",
+      "PHONE_STATE"
     ],
     "resources": {
       "media": [

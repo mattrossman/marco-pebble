@@ -14,9 +14,9 @@ if [[ "${1:-}" == "--" ]]; then
 fi
 
 scripts/ensure-pebble-sdk.sh
-# CloudPebble installs can launch the app immediately. Keep development
-# installs silent unless the caller explicitly opts into speaker output.
-export MARCO_DISABLE_SPEAKER="${MARCO_DISABLE_SPEAKER:-1}"
+# Keep the speaker enabled unless the caller explicitly opts into a silent
+# development build.
+export MARCO_DISABLE_SPEAKER="${MARCO_DISABLE_SPEAKER:-0}"
 scripts/build.sh "$profile"
 
 if [[ "$profile" == "dev" ]]; then
